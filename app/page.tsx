@@ -7,13 +7,13 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 flex items-center justify-center px-4">
       <div className="max-w-2xl mx-auto text-center space-y-8">
-        <div className="space-y-3">
-          <div className="flex items-center justify-center gap-4">
-            <GuruLogo size={72} />
-            <h1 className="text-5xl font-bold text-white tracking-tight">
-              Guru, <span className="text-green-400">M.D.</span>
-            </h1>
+        <div className="space-y-4">
+          <div className="flex justify-center">
+            <GuruLogo size={160} />
           </div>
+          <h1 className="text-5xl font-bold text-white tracking-tight">
+            Guru, <span className="text-green-400">M.D.</span>
+          </h1>
           <p className="text-green-200 text-lg">AI-powered health education for medical students</p>
         </div>
 
