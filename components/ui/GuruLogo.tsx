@@ -3,78 +3,184 @@ interface Props {
   className?: string
 }
 
-export function GuruLogo({ size = 40, className }: Props) {
+/**
+ * Guru M.D. mascot — coronavirus particle with professor beard and walking cane.
+ * ViewBox: 0 0 120 110
+ * Body centre: (52, 46), radius 24
+ * Spikes: 8 ball-tipped protein spikes (bottom two skipped for beard)
+ * Cane extends from lower-right of body outward
+ */
+export function GuruLogo({ size = 44, className }: Props) {
+  const C = { x: 52, y: 46 }   // body centre
+  const BR = 24                  // body radius
+  const SR = 13                  // spike shaft length
+  const BALL = 4                 // spike ball radius
+
+  // 8 spike angles (degrees, SVG convention: 0=right, 90=down, 270=up)
+  // Skip 90° and 135° — beard area
+  const spikes = [
+    { a: 270, scale: 1 },   // straight up
+    { a: 315, scale: 1 },   // upper-right
+    { a: 0,   scale: 0.9 }, // right (slightly shorter — cane nearby)
+    { a: 45,  scale: 0.6 }, // lower-right (short, cane area)
+    { a: 180, scale: 1 },   // left
+    { a: 225, scale: 1 },   // upper-left
+  ]
+
+  function toRad(deg: number) { return (deg * Math.PI) / 180 }
+  function spikeEnd(a: number, scale: number) {
+    const r = toRad(a)
+    const ex = C.x + (BR + SR * scale) * Math.cos(r)
+    const ey = C.y + (BR + SR * scale) * Math.sin(r)
+    const sx = C.x + BR * Math.cos(r)
+    const sy = C.y + BR * Math.sin(r)
+    return { ex, ey, sx, sy }
+  }
+
   return (
     <svg
       width={size}
-      height={size}
-      viewBox="0 0 80 80"
+      height={size * (110 / 120)}
+      viewBox="0 0 120 110"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-label="Guru M.D. virus mascot"
+      aria-label="Guru M.D. — virus professor mascot"
     >
-      {/* === SPIKES === */}
-      {/* Top */}
-      <ellipse cx="40" cy="8" rx="3" ry="6" fill="#4ade80" transform="rotate(0 40 40)" />
-      {/* Top-right */}
-      <ellipse cx="40" cy="8" rx="3" ry="6" fill="#4ade80" transform="rotate(45 40 40)" />
-      {/* Right */}
-      <ellipse cx="40" cy="8" rx="3" ry="6" fill="#4ade80" transform="rotate(90 40 40)" />
-      {/* Bottom-right — shortened to make room for cane */}
-      <ellipse cx="40" cy="8" rx="3" ry="5" fill="#4ade80" transform="rotate(135 40 40)" />
-      {/* Bottom — shortened for beard area */}
-      <ellipse cx="40" cy="8" rx="3" ry="4" fill="#4ade80" transform="rotate(180 40 40)" />
-      {/* Bottom-left */}
-      <ellipse cx="40" cy="8" rx="3" ry="4" fill="#4ade80" transform="rotate(225 40 40)" />
-      {/* Left */}
-      <ellipse cx="40" cy="8" rx="3" ry="6" fill="#4ade80" transform="rotate(270 40 40)" />
-      {/* Top-left */}
-      <ellipse cx="40" cy="8" rx="3" ry="6" fill="#4ade80" transform="rotate(315 40 40)" />
+      {/* ── SPIKE SHAFTS (behind body) ── */}
+      {spikes.map(({ a, scale }) => {
+        const { ex, ey, sx, sy } = spikeEnd(a, scale)
+        return (
+          <line
+            key={`shaft-${a}`}
+            x1={sx} y1={sy} x2={ex} y2={ey}
+            stroke="#15803d" strokeWidth="3.5" strokeLinecap="round"
+          />
+        )
+      })}
 
-      {/* === BODY === */}
-      <circle cx="40" cy="40" r="20" fill="#16a34a" />
-      {/* Body sheen */}
-      <ellipse cx="34" cy="33" rx="5" ry="3.5" fill="#22c55e" opacity="0.4" transform="rotate(-20 34 33)" />
+      {/* ── BODY ── */}
+      {/* Drop shadow */}
+      <circle cx={C.x + 1.5} cy={C.y + 2} r={BR} fill="#052e16" opacity="0.35" />
+      {/* Main body */}
+      <circle cx={C.x} cy={C.y} r={BR} fill="#16a34a" />
+      {/* Inner sheen ring */}
+      <circle cx={C.x} cy={C.y} r={BR - 1} fill="none" stroke="#22c55e" strokeWidth="1.5" opacity="0.3" />
+      {/* Highlight blob */}
+      <ellipse cx={C.x - 8} cy={C.y - 10} rx={7} ry={5}
+        fill="#4ade80" opacity="0.35" transform={`rotate(-30 ${C.x - 8} ${C.y - 10})`} />
 
-      {/* === EYES === */}
-      <ellipse cx="34" cy="37" rx="4" ry="4.5" fill="white" />
-      <ellipse cx="46" cy="37" rx="4" ry="4.5" fill="white" />
-      {/* Pupils */}
-      <circle cx="35" cy="38" r="2.2" fill="#14532d" />
-      <circle cx="47" cy="38" r="2.2" fill="#14532d" />
+      {/* ── SPIKE BALLS (in front of body) ── */}
+      {spikes.map(({ a, scale }) => {
+        const { ex, ey } = spikeEnd(a, scale)
+        return (
+          <g key={`ball-${a}`}>
+            <circle cx={ex} cy={ey} r={BALL * scale} fill="#22c55e" />
+            <circle cx={ex} cy={ey} r={BALL * scale} fill="none" stroke="#4ade80" strokeWidth="0.8" opacity="0.6" />
+            {/* tiny shine on each ball */}
+            <circle cx={ex - BALL * scale * 0.3} cy={ey - BALL * scale * 0.35}
+              r={BALL * scale * 0.28} fill="white" opacity="0.4" />
+          </g>
+        )
+      })}
+
+      {/* ── EYEBROWS — bushy professor brows ── */}
+      {/* Left brow — arched, thick */}
+      <path d="M37 34 Q42 30.5 47 33.5"
+        stroke="#f0fdf4" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+      <path d="M37 34 Q42 30.5 47 33.5"
+        stroke="white" strokeWidth="1.4" strokeLinecap="round" fill="none" />
+      {/* Right brow */}
+      <path d="M57 33.5 Q62 30.5 67 34"
+        stroke="#f0fdf4" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+      <path d="M57 33.5 Q62 30.5 67 34"
+        stroke="white" strokeWidth="1.4" strokeLinecap="round" fill="none" />
+
+      {/* ── EYES ── */}
+      {/* Left eye white */}
+      <ellipse cx="42" cy="40" rx="5" ry="5.5" fill="white" />
+      {/* Right eye white */}
+      <ellipse cx="62" cy="40" rx="5" ry="5.5" fill="white" />
+      {/* Left pupil */}
+      <circle cx="43" cy="41" r="3" fill="#14532d" />
+      {/* Right pupil */}
+      <circle cx="63" cy="41" r="3" fill="#14532d" />
+      {/* Iris detail */}
+      <circle cx="43" cy="41" r="1.6" fill="#052e16" />
+      <circle cx="63" cy="41" r="1.6" fill="#052e16" />
       {/* Eye shine */}
-      <circle cx="36" cy="36.5" r="0.8" fill="white" />
-      <circle cx="48" cy="36.5" r="0.8" fill="white" />
+      <circle cx="44.5" cy="39.2" r="1.1" fill="white" />
+      <circle cx="64.5" cy="39.2" r="1.1" fill="white" />
+      {/* Lower shine */}
+      <circle cx="42.5" cy="43" r="0.6" fill="white" opacity="0.5" />
+      <circle cx="62.5" cy="43" r="0.6" fill="white" opacity="0.5" />
 
-      {/* === EYEBROWS (old man) === */}
-      <path d="M30 32 Q34 30 38 32" stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <path d="M42 32 Q46 30 50 32" stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      {/* ── NOSE ── */}
+      <ellipse cx="52" cy="47.5" rx="2" ry="1.4" fill="#14532d" opacity="0.7" />
 
-      {/* === NOSE === */}
-      <ellipse cx="40" cy="43" rx="1.5" ry="1" fill="#14532d" />
+      {/* ── MOUSTACHE ── */}
+      <path d="M44 50.5 Q48 48.5 52 49.5 Q56 48.5 60 50.5"
+        stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
 
-      {/* === SMILE === */}
-      <path d="M35 47 Q40 51 45 47" stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      {/* ── SMILE ── */}
+      <path d="M45 53 Q52 58.5 59 53"
+        stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
 
-      {/* === BEARD === */}
-      {/* Moustache */}
-      <path d="M35 45.5 Q37.5 44 40 45 Q42.5 44 45 45.5" stroke="white" strokeWidth="1.4" strokeLinecap="round" fill="none" />
-      {/* Beard body - wavy strands */}
-      <path d="M32 51 Q31 56 33 60 Q35 64 37 62 Q38 60 40 61 Q42 60 43 62 Q45 64 47 60 Q49 56 48 51"
-        fill="white" opacity="0.9" />
-      {/* Beard texture lines */}
-      <path d="M36 53 Q36 57 37 60" stroke="#d1fae5" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.6" />
-      <path d="M40 53 Q40 57 40 61" stroke="#d1fae5" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.6" />
-      <path d="M44 53 Q44 57 43 60" stroke="#d1fae5" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.6" />
+      {/* ── BEARD ── */}
+      {/* Beard base shape — wide bib flowing from chin */}
+      <path
+        d="M39 57
+           Q35 60 33 65
+           Q31 71 34 76
+           Q36 80 40 81
+           Q44 83 48 82
+           Q53 81 57 79
+           Q61 76 63 72
+           Q65 67 63 62
+           Q61 59 58 57
+           Z"
+        fill="white"
+        opacity="0.95"
+      />
+      {/* Beard inner shading */}
+      <path
+        d="M41 59
+           Q38 63 37 68
+           Q36 73 39 77
+           Q42 80 48 80
+           Q54 80 58 76
+           Q61 72 60 66
+           Q59 61 57 59
+           Z"
+        fill="#f0fdf4"
+        opacity="0.6"
+      />
+      {/* Beard strand lines */}
+      <path d="M42 60 Q41 67 42 75" stroke="#d1fae5" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.7" />
+      <path d="M48 61 Q47 68 48 78" stroke="#d1fae5" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.7" />
+      <path d="M54 60 Q55 67 54 75" stroke="#d1fae5" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.7" />
+      {/* Wavy beard bottom */}
+      <path d="M34 76 Q37 80 40 77 Q43 80 47 79 Q51 82 55 79 Q58 81 63 75"
+        fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
 
-      {/* === WALKING CANE === */}
-      {/* Cane shaft */}
-      <line x1="55" y1="52" x2="66" y2="73" stroke="#a16207" strokeWidth="2.5" strokeLinecap="round" />
-      {/* Cane handle (J-curve) */}
-      <path d="M55 52 Q52 46 57 44" stroke="#a16207" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-      {/* Cane tip */}
-      <circle cx="66" cy="73" r="1.5" fill="#a16207" />
+      {/* ── WALKING CANE ── */}
+      {/* Cane arm: starts from right side of body, goes out at angle */}
+      {/* Shaft: from right-lower body area down-right */}
+      <line x1="71" y1="55" x2="93" y2="90"
+        stroke="#92400e" strokeWidth="3" strokeLinecap="round" />
+      {/* Shaft highlight */}
+      <line x1="71" y1="55" x2="93" y2="90"
+        stroke="#d97706" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
+      {/* J-handle at top — curving back to the left */}
+      <path d="M71 55 Q67 46 72 40 Q76 36 80 39"
+        stroke="#92400e" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M71 55 Q67 46 72 40 Q76 36 80 39"
+        stroke="#d97706" strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.5" />
+      {/* Handle grip end cap */}
+      <circle cx="80" cy="39" r="2.5" fill="#92400e" />
+      <circle cx="80" cy="39" r="1.2" fill="#d97706" />
+      {/* Cane tip rubber tip */}
+      <ellipse cx="93" cy="90" rx="2.5" ry="2" fill="#44403c" />
     </svg>
   )
 }
