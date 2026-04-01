@@ -28,7 +28,7 @@ export function RecommendationPanel() {
       <Card className="bg-slate-900 border-slate-800">
         <CardHeader className="pb-3">
           <CardTitle className="text-white text-base flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-blue-400" /> AI Recommendations
+            <Sparkles className="w-4 h-4 text-green-400" /> AI Recommendations
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -46,7 +46,7 @@ export function RecommendationPanel() {
     <Card className="bg-slate-900 border-slate-800">
       <CardHeader className="pb-3">
         <CardTitle className="text-white text-base flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-blue-400" /> Recommended for you
+          <Sparkles className="w-4 h-4 text-green-400" /> Recommended for you
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -60,7 +60,7 @@ export function RecommendationPanel() {
               <div className="text-sm font-medium text-white">{rec.title}</div>
               <div className="text-xs text-slate-400 mt-0.5 line-clamp-2">{rec.reason}</div>
             </div>
-            <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 transition-colors flex-shrink-0 mt-0.5" />
+            <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-green-400 transition-colors flex-shrink-0 mt-0.5" />
           </Link>
         ))}
       </CardContent>

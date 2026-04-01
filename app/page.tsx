@@ -1,17 +1,20 @@
 import Link from 'next/link'
 import { buttonVariants } from '@/lib/button-variants'
 import { cn } from '@/lib/utils'
+import { GuruLogo } from '@/components/ui/GuruLogo'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center px-4">
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 flex items-center justify-center px-4">
       <div className="max-w-2xl mx-auto text-center space-y-8">
-        <div className="space-y-2">
-          <div className="text-7xl">🦠</div>
-          <h1 className="text-5xl font-bold text-white tracking-tight">
-            Guru, <span className="text-blue-400">M.D.</span>
-          </h1>
-          <p className="text-blue-200 text-lg">AI-powered health education for medical students</p>
+        <div className="space-y-3">
+          <div className="flex items-center justify-center gap-4">
+            <GuruLogo size={72} />
+            <h1 className="text-5xl font-bold text-white tracking-tight">
+              Guru, <span className="text-green-400">M.D.</span>
+            </h1>
+          </div>
+          <p className="text-green-200 text-lg">AI-powered health education for medical students</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 text-left">
@@ -30,7 +33,7 @@ export default function Home() {
         </div>
 
         <div className="flex gap-4 justify-center">
-          <Link href="/signup" className={cn(buttonVariants({ size: 'lg' }), 'bg-blue-600 hover:bg-blue-500 text-white px-8')}>
+          <Link href="/signup" className={cn(buttonVariants({ size: 'lg' }), 'bg-green-600 hover:bg-green-500 text-white px-8')}>
             Get started
           </Link>
           <Link href="/login" className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'border-white/20 text-white hover:bg-white/10 px-8')}>

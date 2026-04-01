@@ -86,7 +86,7 @@ export function QuizRunner({ moduleId, moduleTitle, pathSlug }: Props) {
           <h3 className="text-lg font-semibold text-white">Quiz: {moduleTitle}</h3>
           <p className="text-slate-400 text-sm mt-1">5 AI-generated questions · 60% to pass</p>
         </div>
-        <Button onClick={startQuiz} disabled={generating} className="bg-blue-600 hover:bg-blue-500">
+        <Button onClick={startQuiz} disabled={generating} className="bg-green-600 hover:bg-green-500">
           {generating ? 'Generating questions…' : 'Start quiz'}
         </Button>
       </div>
@@ -107,7 +107,7 @@ export function QuizRunner({ moduleId, moduleTitle, pathSlug }: Props) {
           <Button onClick={startQuiz} disabled={generating} variant="outline" className="border-slate-700 text-slate-300">
             {generating ? 'Generating…' : 'Retry'}
           </Button>
-          <Button onClick={() => router.push(`/dashboard/paths/${pathSlug}`)} className="bg-blue-600 hover:bg-blue-500">
+          <Button onClick={() => router.push(`/dashboard/paths/${pathSlug}`)} className="bg-green-600 hover:bg-green-500">
             Back to path
           </Button>
         </div>
@@ -124,7 +124,7 @@ export function QuizRunner({ moduleId, moduleTitle, pathSlug }: Props) {
           <span>Question {current + 1} of {questions.length}</span>
           <div className="flex gap-1">
             {questions.map((_, i) => (
-              <div key={i} className={cn('w-2 h-2 rounded-full', i < current ? 'bg-blue-500' : i === current ? 'bg-white' : 'bg-slate-700')} />
+              <div key={i} className={cn('w-2 h-2 rounded-full', i < current ? 'bg-green-500' : i === current ? 'bg-white' : 'bg-slate-700')} />
             ))}
           </div>
         </div>
@@ -147,7 +147,7 @@ export function QuizRunner({ moduleId, moduleTitle, pathSlug }: Props) {
               else if (isSelected && !isCorrect) style = 'bg-red-900/40 border-red-500 text-red-300'
               else style = 'bg-slate-800 border-slate-700 text-slate-500'
             } else if (isSelected) {
-              style = 'bg-blue-900/40 border-blue-500 text-blue-200'
+              style = 'bg-green-900/40 border-green-500 text-green-200'
             }
             return (
               <button
@@ -166,9 +166,9 @@ export function QuizRunner({ moduleId, moduleTitle, pathSlug }: Props) {
 
         {/* Explanation */}
         {revealed && (
-          <Card className="bg-blue-950/40 border-blue-800/50">
+          <Card className="bg-green-950/40 border-green-800/50">
             <CardContent className="pt-4 pb-4">
-              <p className="text-blue-200 text-sm">{q.explanation}</p>
+              <p className="text-green-200 text-sm">{q.explanation}</p>
             </CardContent>
           </Card>
         )}
@@ -176,11 +176,11 @@ export function QuizRunner({ moduleId, moduleTitle, pathSlug }: Props) {
         {/* Action */}
         <div className="flex justify-end">
           {!revealed ? (
-            <Button onClick={confirm} disabled={selected === null} className="bg-blue-600 hover:bg-blue-500">
+            <Button onClick={confirm} disabled={selected === null} className="bg-green-600 hover:bg-green-500">
               Confirm answer
             </Button>
           ) : (
-            <Button onClick={next} className="bg-blue-600 hover:bg-blue-500">
+            <Button onClick={next} className="bg-green-600 hover:bg-green-500">
               {current + 1 < questions.length ? (
                 <><ChevronRight className="w-4 h-4 mr-1" /> Next question</>
               ) : 'See results'}

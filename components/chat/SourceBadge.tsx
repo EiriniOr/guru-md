@@ -19,7 +19,7 @@ export function SourceBadge({ index, source }: Props) {
       title={source.title}
       className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs transition-colors"
     >
-      <span className="text-blue-400 font-mono">[{index}]</span>
+      <span className="text-green-400 font-mono">[{index}]</span>
       <span className="max-w-[120px] truncate">{hostname}</span>
     </a>
   )

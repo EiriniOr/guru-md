@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { SourceBadge } from './SourceBadge'
+import { GuruLogo } from '@/components/ui/GuruLogo'
 import type { TavilySource } from '@/types'
 
 interface Message {
@@ -15,8 +16,8 @@ export function ChatMessage({ message }: { message: Message }) {
   return (
     <div className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}>
       {!isUser && (
-        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0 text-sm">
-          🦠
+        <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+          <GuruLogo size={28} />
         </div>
       )}
 
@@ -24,7 +25,7 @@ export function ChatMessage({ message }: { message: Message }) {
         <div
           className={`rounded-2xl px-4 py-3 text-sm ${
             isUser
-              ? 'bg-blue-600 text-white rounded-tr-sm'
+              ? 'bg-green-600 text-white rounded-tr-sm'
               : 'bg-slate-800 text-slate-100 rounded-tl-sm'
           }`}
         >
@@ -35,12 +36,12 @@ export function ChatMessage({ message }: { message: Message }) {
               prose-p:my-1 prose-p:text-slate-100
               prose-headings:text-white prose-headings:font-semibold prose-headings:mt-3 prose-headings:mb-1
               prose-strong:text-white
-              prose-code:text-blue-300 prose-code:bg-slate-700 prose-code:px-1 prose-code:rounded prose-code:text-xs
+              prose-code:text-green-300 prose-code:bg-slate-700 prose-code:px-1 prose-code:rounded prose-code:text-xs
               prose-pre:bg-slate-700 prose-pre:text-xs
               prose-table:text-slate-200 prose-th:text-white prose-th:border-slate-600 prose-td:border-slate-600
-              prose-blockquote:border-blue-400 prose-blockquote:text-slate-300
+              prose-blockquote:border-green-400 prose-blockquote:text-slate-300
               prose-li:text-slate-100 prose-li:my-0.5
-              prose-a:text-blue-400
+              prose-a:text-green-400
             ">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {message.content || '▌'}

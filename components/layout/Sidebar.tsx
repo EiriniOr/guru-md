@@ -10,6 +10,7 @@ import {
   Newspaper,
   LogOut,
 } from 'lucide-react'
+import { GuruLogo } from '@/components/ui/GuruLogo'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -33,12 +34,12 @@ export function Sidebar() {
   return (
     <aside className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col h-full fixed left-0 top-0">
       {/* Logo */}
-      <div className="px-6 py-5 border-b border-slate-800">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <span className="text-2xl">🦠</span>
-          <span className="font-bold text-white text-lg">Guru, <span className="text-blue-400">M.D.</span></span>
+      <div className="px-4 py-4 border-b border-slate-800">
+        <Link href="/dashboard" className="flex items-center gap-2.5">
+          <GuruLogo size={36} />
+          <span className="font-bold text-white text-base leading-tight">Guru, <span className="text-green-400">M.D.</span></span>
         </Link>
-        <span className="text-xs text-slate-500 mt-1 block">Student mode</span>
+        <span className="text-xs text-slate-500 mt-1 block pl-1">Student mode</span>
       </div>
 
       {/* Nav */}
@@ -54,7 +55,7 @@ export function Sidebar() {
               className={cn(
                 'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
                 active
-                  ? 'bg-blue-600/20 text-blue-400'
+                  ? 'bg-green-600/20 text-green-400'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800'
               )}
             >

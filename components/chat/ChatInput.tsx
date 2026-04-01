@@ -68,13 +68,13 @@ export function ChatInput({ onSend, disabled }: Props) {
           disabled={disabled}
           placeholder="Ask a medical question… (Enter to send)"
           rows={1}
-          className="flex-1 resize-none bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50 overflow-hidden"
+          className="flex-1 resize-none bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-green-500 transition-colors disabled:opacity-50 overflow-hidden"
         />
         <Button
           onClick={handleSend}
           disabled={disabled || !value.trim()}
           size="icon"
-          className="bg-blue-600 hover:bg-blue-500 flex-shrink-0 rounded-xl w-11 h-11"
+          className="bg-green-600 hover:bg-green-500 flex-shrink-0 rounded-xl w-11 h-11"
         >
           <SendHorizonal className="w-4 h-4" />
         </Button>

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { ChatMessage } from './ChatMessage'
 import { ChatInput } from './ChatInput'
+import { GuruLogo } from '@/components/ui/GuruLogo'
 import type { TavilySource } from '@/types'
 
 interface Message {
@@ -78,8 +79,8 @@ export function ChatWindow({ moduleTitle, initialSessionId }: Props) {
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-6 space-y-4">
         {messages.length === 0 && (
-          <div className="text-center text-slate-500 mt-16 space-y-2">
-            <div className="text-5xl">🦠</div>
+          <div className="text-center text-slate-500 mt-16 space-y-3">
+            <div className="flex justify-center"><GuruLogo size={64} /></div>
             <p className="text-lg font-medium text-slate-300">Ask Guru, M.D.</p>
             <p className="text-sm">
               {moduleTitle

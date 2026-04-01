@@ -59,7 +59,7 @@ export function NewsFeed() {
             className="pl-9 bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
           />
         </div>
-        <Button type="submit" disabled={loading} className="bg-blue-600 hover:bg-blue-500">
+        <Button type="submit" disabled={loading} className="bg-green-600 hover:bg-green-500">
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Search'}
         </Button>
         <Button

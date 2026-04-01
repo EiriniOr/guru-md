@@ -42,7 +42,7 @@ export default async function DashboardPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
         {[
-          { icon: BookOpen, label: 'Paths started', value: startedPaths, color: 'text-blue-400' },
+          { icon: BookOpen, label: 'Paths started', value: startedPaths, color: 'text-green-400' },
           { icon: CheckCircle, label: 'Modules completed', value: completedModules, color: 'text-green-400' },
           { icon: TrendingUp, label: 'Available paths', value: (paths as LearningPath[] | null)?.length ?? 0, color: 'text-purple-400' },
         ].map(({ icon: Icon, label, value, color }) => (
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-white">Learning Paths</h2>
-              <Link href="/dashboard/paths" className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'text-blue-400 hover:text-blue-300')}>
+              <Link href="/dashboard/paths" className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'text-green-400 hover:text-green-300')}>
                 View all
               </Link>
             </div>
@@ -77,7 +77,7 @@ export default async function DashboardPage() {
                 const completed = pathProgress.filter(p => p.status === 'completed').length
                 return (
                   <Link key={path.id} href={`/dashboard/paths/${path.slug}`}>
-                    <Card className="bg-slate-900 border-slate-800 hover:border-blue-600/50 transition-colors cursor-pointer h-full">
+                    <Card className="bg-slate-900 border-slate-800 hover:border-green-600/50 transition-colors cursor-pointer h-full">
                       <CardHeader className="pb-2">
                         <div className="text-3xl mb-2">{path.icon}</div>
                         <CardTitle className="text-white text-sm">{path.title}</CardTitle>
@@ -96,16 +96,16 @@ export default async function DashboardPage() {
           </div>
 
           {/* Tutor CTA */}
-          <Card className="bg-gradient-to-r from-blue-900/40 to-slate-900 border-blue-800/50">
+          <Card className="bg-gradient-to-r from-green-900/40 to-slate-900 border-green-800/50">
             <CardContent className="pt-5 pb-5 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <MessageCircle className="w-9 h-9 text-blue-400" />
+                <MessageCircle className="w-9 h-9 text-green-400" />
                 <div>
                   <div className="font-semibold text-white text-sm">AI Tutor</div>
                   <div className="text-slate-400 text-xs">EU guidelines, drug mechanisms, anatomy</div>
                 </div>
               </div>
-              <Link href="/dashboard/tutor" className={cn(buttonVariants(), 'bg-blue-600 hover:bg-blue-500 text-sm')}>
+              <Link href="/dashboard/tutor" className={cn(buttonVariants(), 'bg-green-600 hover:bg-green-500 text-sm')}>
                 Start chatting
               </Link>
             </CardContent>

@@ -23,7 +23,7 @@ export function NewsCard({ article }: { article: Article }) {
               href={article.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white text-sm font-medium hover:text-blue-400 transition-colors line-clamp-2 leading-snug"
+              className="text-white text-sm font-medium hover:text-green-400 transition-colors line-clamp-2 leading-snug"
             >
               {article.title}
             </a>
@@ -38,7 +38,7 @@ export function NewsCard({ article }: { article: Article }) {
             href={article.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-slate-600 hover:text-blue-400 transition-colors flex-shrink-0 mt-0.5"
+            className="text-slate-600 hover:text-green-400 transition-colors flex-shrink-0 mt-0.5"
           >
             <ExternalLink className="w-4 h-4" />
           </a>

@@ -71,7 +71,7 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
 
           return (
             <Link key={module.id} href={`/dashboard/paths/${slug}/${module.id}`}>
-              <Card className="bg-slate-900 border-slate-800 hover:border-blue-600/40 transition-all cursor-pointer">
+              <Card className="bg-slate-900 border-slate-800 hover:border-green-600/40 transition-all cursor-pointer">
                 <CardContent className="py-4 flex items-center gap-4">
                   <div className="flex-shrink-0">
                     {isDone
@@ -96,7 +96,7 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
         })}
       </div>
 
-      <Link href={`/dashboard/tutor?path=${path.slug}`} className={cn(buttonVariants({ variant: 'ghost' }), 'text-blue-400 hover:text-blue-300 pl-0')}>
+      <Link href={`/dashboard/tutor?path=${path.slug}`} className={cn(buttonVariants({ variant: 'ghost' }), 'text-green-400 hover:text-green-300 pl-0')}>
         Ask the AI Tutor about {path.title} →
       </Link>
     </div>

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { GuruLogo } from '@/components/ui/GuruLogo'
 import { toast } from 'sonner'
 
 export default function LoginPage() {
@@ -31,11 +32,13 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center px-4">
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 flex items-center justify-center px-4">
       <div className="w-full max-w-sm space-y-6">
-        <div className="text-center space-y-1">
-          <div className="text-4xl">🦠</div>
-          <h1 className="text-2xl font-bold text-white">Guru, M.D.</h1>
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center gap-3">
+            <GuruLogo size={44} />
+            <h1 className="text-2xl font-bold text-white">Guru, <span className="text-green-400">M.D.</span></h1>
+          </div>
           <p className="text-slate-400 text-sm">Sign in to your account</p>
         </div>
 
@@ -71,12 +74,12 @@ export default function LoginPage() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-3">
-              <Button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-500">
+              <Button type="submit" disabled={loading} className="w-full bg-green-600 hover:bg-green-500">
                 {loading ? 'Signing in…' : 'Sign in'}
               </Button>
               <p className="text-slate-400 text-sm text-center">
                 No account?{' '}
-                <Link href="/signup" className="text-blue-400 hover:underline">Sign up</Link>
+                <Link href="/signup" className="text-green-400 hover:underline">Sign up</Link>
               </p>
             </CardFooter>
           </form>

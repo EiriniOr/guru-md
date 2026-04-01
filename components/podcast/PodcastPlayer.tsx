@@ -89,10 +89,10 @@ export function PodcastPlayer({ topic, articles }: Props) {
   }
 
   return (
-    <Card className="bg-gradient-to-r from-blue-950/60 to-slate-900 border-blue-800/40">
+    <Card className="bg-gradient-to-r from-green-950/60 to-slate-900 border-green-800/40">
       <CardHeader className="pb-3">
         <CardTitle className="text-white text-base flex items-center gap-2">
-          <Mic className="w-4 h-4 text-blue-400" />
+          <Mic className="w-4 h-4 text-green-400" />
           Guru, M.D. Podcast
         </CardTitle>
       </CardHeader>
@@ -106,7 +106,7 @@ export function PodcastPlayer({ topic, articles }: Props) {
           {state === 'idle' || state === 'ready' ? (
             <Button
               onClick={state === 'idle' ? generate : play}
-              className="bg-blue-600 hover:bg-blue-500"
+              className="bg-green-600 hover:bg-green-500"
             >
               {state === 'idle' ? (
                 <><Mic className="w-4 h-4 mr-2" /> Generate episode</>
@@ -115,7 +115,7 @@ export function PodcastPlayer({ topic, articles }: Props) {
               )}
             </Button>
           ) : state === 'generating' ? (
-            <Button disabled className="bg-blue-600/50">
+            <Button disabled className="bg-green-600/50">
               <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Generating script…
             </Button>
           ) : state === 'playing' ? (
@@ -129,7 +129,7 @@ export function PodcastPlayer({ topic, articles }: Props) {
             </>
           ) : state === 'paused' ? (
             <>
-              <Button onClick={play} className="bg-blue-600 hover:bg-blue-500">
+              <Button onClick={play} className="bg-green-600 hover:bg-green-500">
                 <Play className="w-4 h-4 mr-2" /> Resume
               </Button>
               <Button onClick={stop} variant="outline" className="border-slate-700 text-slate-300">

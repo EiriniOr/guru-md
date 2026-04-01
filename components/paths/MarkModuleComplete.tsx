@@ -54,7 +54,7 @@ export function MarkModuleComplete({ userId, moduleId, pathId, isCompleted }: Pr
       disabled={loading}
       className={done
         ? 'bg-green-700 hover:bg-green-800 text-white'
-        : 'bg-blue-600 hover:bg-blue-500 text-white'
+        : 'bg-green-600 hover:bg-green-500 text-white'
       }
     >
       <CheckCircle className="w-4 h-4 mr-2" />
