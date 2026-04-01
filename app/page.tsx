@@ -9,7 +9,7 @@ export default function Home() {
       <div className="max-w-2xl mx-auto text-center space-y-8">
         <div className="space-y-4">
           <div className="flex justify-center">
-            <GuruLogo size={160} />
+            <GuruLogo size={220} />
           </div>
           <h1 className="text-5xl font-bold text-white tracking-tight">
             Guru, <span className="text-green-400">M.D.</span>
