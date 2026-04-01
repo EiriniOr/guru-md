@@ -5,9 +5,9 @@ import { ChevronRight, MessageCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/lib/button-variants'
 import { cn } from '@/lib/utils'
+
 import { MarkModuleComplete } from '@/components/paths/MarkModuleComplete'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import { ModuleTabs } from '@/components/paths/ModuleTabs'
 
 export default async function ModulePage({
   params,
@@ -71,24 +71,13 @@ export default async function ModulePage({
         <p className="text-slate-400">{module_.description}</p>
       </div>
 
-      {/* Content */}
-      <div className="prose prose-invert prose-sm max-w-none
-        prose-headings:text-white prose-headings:font-semibold
-        prose-p:text-slate-300 prose-p:leading-relaxed
-        prose-strong:text-white
-        prose-code:text-blue-300 prose-code:bg-slate-800 prose-code:px-1 prose-code:rounded
-        prose-pre:bg-slate-800 prose-pre:border prose-pre:border-slate-700
-        prose-table:text-slate-300
-        prose-th:text-white prose-th:border-slate-700
-        prose-td:border-slate-700
-        prose-blockquote:border-blue-500 prose-blockquote:text-slate-300 prose-blockquote:bg-blue-950/30 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
-        prose-a:text-blue-400
-        prose-li:text-slate-300
-        ">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {module_.content_md}
-        </ReactMarkdown>
-      </div>
+      {/* Tabs: content / quiz */}
+      <ModuleTabs
+        content={module_.content_md}
+        moduleId={module_.id}
+        moduleTitle={module_.title}
+        pathSlug={slug}
+      />
 
       {/* Actions */}
       <div className="flex items-center gap-3 pt-4 border-t border-slate-800">
