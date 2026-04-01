@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   BookOpen,
   MessageCircle,
+  Newspaper,
   LogOut,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
@@ -16,6 +17,7 @@ const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/dashboard/paths', icon: BookOpen, label: 'Learning Paths' },
   { href: '/dashboard/tutor', icon: MessageCircle, label: 'AI Tutor' },
+  { href: '/dashboard/news', icon: Newspaper, label: 'News & Podcast' },
 ]
 
 export function Sidebar() {
