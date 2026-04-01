@@ -40,13 +40,13 @@ export function ModuleTabs({ content, moduleId, moduleTitle, pathSlug }: Props) 
           prose-headings:text-white prose-headings:font-semibold
           prose-p:text-slate-300 prose-p:leading-relaxed
           prose-strong:text-white
-          prose-code:text-blue-300 prose-code:bg-slate-800 prose-code:px-1 prose-code:rounded
+          prose-code:text-green-300 prose-code:bg-slate-800 prose-code:px-1 prose-code:rounded
           prose-pre:bg-slate-800 prose-pre:border prose-pre:border-slate-700
           prose-table:text-slate-300
           prose-th:text-white prose-th:border-slate-700
           prose-td:border-slate-700
-          prose-blockquote:border-blue-500 prose-blockquote:text-slate-300 prose-blockquote:bg-blue-950/30 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
-          prose-a:text-blue-400
+          prose-blockquote:border-green-500 prose-blockquote:text-slate-300 prose-blockquote:bg-green-950/30 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
+          prose-a:text-green-400
           prose-li:text-slate-300
         ">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>

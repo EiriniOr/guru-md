@@ -30,7 +30,7 @@ export default async function PathsPage() {
 
           return (
             <Link key={path.id} href={`/dashboard/paths/${path.slug}`}>
-              <Card className="bg-slate-900 border-slate-800 hover:border-blue-600/50 transition-all cursor-pointer">
+              <Card className="bg-slate-900 border-slate-800 hover:border-green-600/50 transition-all cursor-pointer">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-4">
@@ -56,7 +56,7 @@ export default async function PathsPage() {
                   {started && (
                     <div className="mt-3 bg-slate-800 rounded-full h-1.5">
                       <div
-                        className="bg-blue-500 h-1.5 rounded-full transition-all"
+                        className="bg-green-500 h-1.5 rounded-full transition-all"
                         style={{ width: `${(completed / pathModules.length) * 100}%` }}
                       />
                     </div>
