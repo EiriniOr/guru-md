@@ -3,10 +3,10 @@ import type { TavilySource } from '@/types'
 
 const client = tavily({ apiKey: process.env.TAVILY_API_KEY! })
 
-export async function searchMedical(query: string, maxResults = 4): Promise<TavilySource[]> {
+export async function searchMedical(query: string, maxResults = 6): Promise<TavilySource[]> {
   try {
     const response = await client.search(query, {
-      searchDepth: 'basic',
+      searchDepth: 'advanced',
       maxResults,
       includeAnswer: false,
     })
