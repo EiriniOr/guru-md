@@ -8,6 +8,7 @@ import {
   BookOpen,
   MessageCircle,
   Newspaper,
+  UserCircle,
   LogOut,
 } from 'lucide-react'
 import { GuruLogo } from '@/components/ui/GuruLogo'
@@ -19,6 +20,7 @@ const navItems = [
   { href: '/dashboard/paths', icon: BookOpen, label: 'Learning Paths' },
   { href: '/dashboard/tutor', icon: MessageCircle, label: 'AI Tutor' },
   { href: '/dashboard/news', icon: Newspaper, label: 'News & Podcast' },
+  { href: '/dashboard/account', icon: UserCircle, label: 'Account' },
 ]
 
 export function Sidebar() {
