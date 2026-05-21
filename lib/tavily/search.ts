@@ -9,7 +9,7 @@ export async function searchMedical(query: string, maxResults = 4): Promise<Tavi
       searchDepth: 'basic',
       maxResults,
       includeAnswer: false,
-      days: 365,
+      days: 1825,
     })
 
     return response.results.map((r) => ({

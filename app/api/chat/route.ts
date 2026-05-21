@@ -48,7 +48,8 @@ export async function POST(request: Request) {
 
   // Search medical sources
   const sources: TavilySource[] = await searchMedical(
-    `${message} medical education${moduleTitle ? ` ${moduleTitle}` : ''}`
+    `${message} medical education${moduleTitle ? ` ${moduleTitle}` : ''}`,
+    6
   )
 
   // Build messages array
