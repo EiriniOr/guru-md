@@ -9,7 +9,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   if (!user) redirect('/login')
 
   return (
-    <div className="flex h-screen bg-slate-950">
+    <div className="flex h-screen" style={{ backgroundColor: '#020a05' }}>
       <Sidebar />
       <main className="flex-1 ml-64 overflow-y-auto">
         {children}
