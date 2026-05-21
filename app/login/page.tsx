@@ -4,10 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { GuruLogo } from '@/components/ui/GuruLogo'
 import { toast } from 'sonner'
 
@@ -32,58 +30,116 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 flex items-center justify-center px-4">
-      <div className="w-full max-w-sm space-y-6">
+    <main
+      className="min-h-screen flex items-center justify-center px-4 relative"
+      style={{ backgroundColor: '#020a05' }}
+    >
+      {/* Grid overlay */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(0,212,116,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,116,0.04) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+        }}
+      />
+      {/* Glow */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 50% at 50% 40%, rgba(0,212,116,0.07) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-sm space-y-6">
         <div className="text-center space-y-2">
-          <div className="flex items-center justify-center gap-3">
-            <GuruLogo size={44} />
-            <h1 className="text-2xl font-bold text-white">Guru, <span className="text-green-400">M.D.</span></h1>
-          </div>
-          <p className="text-slate-400 text-sm">Sign in to your account</p>
+          <Link href="/" className="inline-flex items-center gap-3 group">
+            <GuruLogo size={40} />
+            <span className="text-2xl font-bold">
+              Guru, <span style={{ color: '#00d474' }}>M.D.</span>
+            </span>
+          </Link>
+          <p className="text-sm" style={{ color: '#52846a' }}>
+            Sign in to your account
+          </p>
         </div>
 
-        <Card className="bg-white/5 border-white/10 text-white">
-          <form onSubmit={handleLogin}>
-            <CardHeader>
-              <CardTitle className="text-white">Welcome back</CardTitle>
-              <CardDescription className="text-slate-400">Enter your credentials to continue</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-slate-300">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@university.se"
-                  required
-                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-slate-300">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="bg-white/10 border-white/20 text-white"
-                />
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-3">
-              <Button type="submit" disabled={loading} className="w-full bg-green-600 hover:bg-green-500">
-                {loading ? 'Signing in…' : 'Sign in'}
-              </Button>
-              <p className="text-slate-400 text-sm text-center">
-                No account?{' '}
-                <Link href="/signup" className="text-green-400 hover:underline">Sign up</Link>
-              </p>
-            </CardFooter>
+        <div
+          className="rounded-2xl p-6 space-y-5"
+          style={{
+            border: '1px solid rgba(0,212,116,0.15)',
+            backgroundColor: 'rgba(10,26,15,0.6)',
+            backdropFilter: 'blur(16px)',
+          }}
+        >
+          <div>
+            <h2 className="text-lg font-bold text-white">Welcome back</h2>
+            <p className="text-sm mt-0.5" style={{ color: '#52846a' }}>
+              Enter your credentials to continue
+            </p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="email" style={{ color: '#a8d5ba' }} className="text-sm">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@university.se"
+                required
+                className="placeholder:text-[#3d5c4a]"
+                style={{
+                  backgroundColor: 'rgba(0,212,116,0.05)',
+                  borderColor: 'rgba(0,212,116,0.15)',
+                  color: 'white',
+                }}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="password" style={{ color: '#a8d5ba' }} className="text-sm">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={{
+                  backgroundColor: 'rgba(0,212,116,0.05)',
+                  borderColor: 'rgba(0,212,116,0.15)',
+                  color: 'white',
+                }}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed"
+              style={{
+                backgroundColor: '#00d474',
+                color: '#020a05',
+                boxShadow: '0 0 20px rgba(0,212,116,0.3)',
+              }}
+            >
+              {loading ? 'Signing in…' : 'Sign in'}
+            </button>
           </form>
-        </Card>
+
+          <p className="text-sm text-center" style={{ color: '#52846a' }}>
+            No account?{' '}
+            <Link href="/signup" className="font-medium hover:underline" style={{ color: '#00d474' }}>
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </main>
   )

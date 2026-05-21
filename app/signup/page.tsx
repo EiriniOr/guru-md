@@ -4,10 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { GuruLogo } from '@/components/ui/GuruLogo'
 import { toast } from 'sonner'
 
@@ -40,7 +38,6 @@ export default function SignupPage() {
       return
     }
 
-    // Update profile with extra fields
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
       await supabase.from('profiles').update({
@@ -54,94 +51,164 @@ export default function SignupPage() {
     router.refresh()
   }
 
+  const inputStyle = {
+    backgroundColor: 'rgba(0,212,116,0.05)',
+    borderColor: 'rgba(0,212,116,0.15)',
+    color: 'white',
+  }
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-sm space-y-6">
+    <main
+      className="min-h-screen flex items-center justify-center px-4 py-12 relative"
+      style={{ backgroundColor: '#020a05' }}
+    >
+      {/* Grid overlay */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(0,212,116,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,116,0.04) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+        }}
+      />
+      {/* Glow */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 50% at 50% 40%, rgba(0,212,116,0.07) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-sm space-y-6">
         <div className="text-center space-y-2">
-          <div className="flex items-center justify-center gap-3">
-            <GuruLogo size={44} />
-            <h1 className="text-2xl font-bold text-white">Guru, <span className="text-green-400">M.D.</span></h1>
-          </div>
-          <p className="text-slate-400 text-sm">Create your student account</p>
+          <Link href="/" className="inline-flex items-center gap-3">
+            <GuruLogo size={40} />
+            <span className="text-2xl font-bold">
+              Guru, <span style={{ color: '#00d474' }}>M.D.</span>
+            </span>
+          </Link>
+          <p className="text-sm" style={{ color: '#52846a' }}>
+            Create your student account
+          </p>
         </div>
 
-        <Card className="bg-white/5 border-white/10 text-white">
-          <form onSubmit={handleSignup}>
-            <CardHeader>
-              <CardTitle className="text-white">Get started</CardTitle>
-              <CardDescription className="text-slate-400">Medical student mode</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-slate-300">Full name</Label>
-                <Input
-                  id="name"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Anna Johansson"
-                  required
-                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-slate-300">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@university.se"
-                  required
-                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-slate-300">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  minLength={6}
-                  required
-                  className="bg-white/10 border-white/20 text-white"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="university" className="text-slate-300">University <span className="text-slate-500">(optional)</span></Label>
-                <Input
-                  id="university"
-                  value={university}
-                  onChange={(e) => setUniversity(e.target.value)}
-                  placeholder="Karolinska Institutet"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="year" className="text-slate-300">Year of study <span className="text-slate-500">(optional)</span></Label>
-                <Input
-                  id="year"
-                  type="number"
-                  min={1}
-                  max={6}
-                  value={yearOfStudy}
-                  onChange={(e) => setYearOfStudy(e.target.value)}
-                  placeholder="1–6"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
-                />
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-3">
-              <Button type="submit" disabled={loading} className="w-full bg-green-600 hover:bg-green-500">
-                {loading ? 'Creating account…' : 'Create account'}
-              </Button>
-              <p className="text-slate-400 text-sm text-center">
-                Already have an account?{' '}
-                <Link href="/login" className="text-green-400 hover:underline">Sign in</Link>
-              </p>
-            </CardFooter>
+        <div
+          className="rounded-2xl p-6 space-y-5"
+          style={{
+            border: '1px solid rgba(0,212,116,0.15)',
+            backgroundColor: 'rgba(10,26,15,0.6)',
+            backdropFilter: 'blur(16px)',
+          }}
+        >
+          <div>
+            <h2 className="text-lg font-bold text-white">Get started</h2>
+            <p className="text-sm mt-0.5" style={{ color: '#52846a' }}>
+              Medical student mode
+            </p>
+          </div>
+
+          <form onSubmit={handleSignup} className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="name" style={{ color: '#a8d5ba' }} className="text-sm">
+                Full name
+              </Label>
+              <Input
+                id="name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Anna Johansson"
+                required
+                className="placeholder:text-[#3d5c4a]"
+                style={inputStyle}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="email" style={{ color: '#a8d5ba' }} className="text-sm">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@university.se"
+                required
+                className="placeholder:text-[#3d5c4a]"
+                style={inputStyle}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="password" style={{ color: '#a8d5ba' }} className="text-sm">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
+                required
+                style={inputStyle}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="university" style={{ color: '#a8d5ba' }} className="text-sm">
+                University{' '}
+                <span style={{ color: '#3d5c4a' }}>(optional)</span>
+              </Label>
+              <Input
+                id="university"
+                value={university}
+                onChange={(e) => setUniversity(e.target.value)}
+                placeholder="Karolinska Institutet"
+                className="placeholder:text-[#3d5c4a]"
+                style={inputStyle}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="year" style={{ color: '#a8d5ba' }} className="text-sm">
+                Year of study{' '}
+                <span style={{ color: '#3d5c4a' }}>(optional)</span>
+              </Label>
+              <Input
+                id="year"
+                type="number"
+                min={1}
+                max={6}
+                value={yearOfStudy}
+                onChange={(e) => setYearOfStudy(e.target.value)}
+                placeholder="1–6"
+                className="placeholder:text-[#3d5c4a]"
+                style={inputStyle}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed"
+              style={{
+                backgroundColor: '#00d474',
+                color: '#020a05',
+                boxShadow: '0 0 20px rgba(0,212,116,0.3)',
+              }}
+            >
+              {loading ? 'Creating account…' : 'Create account'}
+            </button>
           </form>
-        </Card>
+
+          <p className="text-sm text-center" style={{ color: '#52846a' }}>
+            Already have an account?{' '}
+            <Link href="/login" className="font-medium hover:underline" style={{ color: '#00d474' }}>
+              Sign in
+            </Link>
+          </p>
+        </div>
       </div>
     </main>
   )
