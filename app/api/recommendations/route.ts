@@ -21,7 +21,17 @@ export async function GET() {
 
   const activitySummary = (activity ?? [])
     .slice(0, 15)
-    .map(e => `${e.event_type} — ${e.entity_type ?? ''} ${e.entity_id ?? ''} at ${e.created_at.slice(0, 10)}`)
+    .map(e => {
+      if (e.entity_type === 'module') {
+        const mod = (modules ?? []).find(m => m.id === e.entity_id)
+        const path = mod ? (paths ?? []).find(p => p.id === mod.path_id) : null
+        const label = mod
+          ? `"${mod.title}"${path ? ` in ${path.title}` : ''}`
+          : 'unknown module'
+        return `${e.event_type} — ${label} at ${e.created_at.slice(0, 10)}`
+      }
+      return `${e.event_type} — ${e.entity_type ?? 'unknown'} at ${e.created_at.slice(0, 10)}`
+    })
     .join('\n') || 'No activity yet'
 
   const progressSummary = (paths ?? []).map(path => {

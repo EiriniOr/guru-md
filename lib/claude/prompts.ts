@@ -1,11 +1,16 @@
 import type { TavilySource } from '@/types'
 
 export function buildTutorSystemPrompt(sources: TavilySource[], moduleTitle?: string): string {
+  const today = new Date().toISOString().slice(0, 10)
+
   const sourceBlock = sources.length > 0
     ? `\n\n<sources>\n${sources.map((s, i) => `[${i + 1}] ${s.title}\nURL: ${s.url}\n${s.content}`).join('\n\n')}\n</sources>`
     : ''
 
   return `You are Guru, M.D. — an AI medical education tutor for medical students. You specialise in Swedish and EU medical practice.
+
+## Current date
+Today is ${today}. When discussing guidelines or recent evidence, use this date as your reference for what is "current". If a source in your context is from a prior year, note it and flag if newer guidance may supersede it.
 
 ## Your role
 - Teach medical students (pre-clinical and clinical years) evidence-based medicine
